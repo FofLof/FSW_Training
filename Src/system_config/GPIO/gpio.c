@@ -22,19 +22,19 @@
 
 #include "gpio.h"
 
-void gpio_high(GPIO_TypeDef * port, int pin) {
+void _gpio_high(GPIO_TypeDef * port, int pin) {
 	port->BSRR = 1 << pin;
 }
 
-void gpio_low(GPIO_TypeDef * port, int pin) {
+void _gpio_low(GPIO_TypeDef * port, int pin) {
 	port->BSRR = 1 << (pin+16);
 }
 
-void gpio_set(GPIO_TypeDef * port, int pin, int value) {
+void _gpio_set(GPIO_TypeDef * port, int pin, int value) {
 	if (value) {
-		gpio_high(port, pin);
+		_gpio_high(port, pin);
 	} else {
-		gpio_low(port, pin);
+		_gpio_low(port, pin);
 	}
 }
 

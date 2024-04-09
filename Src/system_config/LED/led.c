@@ -97,7 +97,7 @@ void led_init() {
 void led_dx(int pin, int value) {
 
 	if (pin & 0xFFFFFFF8) return;	// not a valid led pin number
-	gpio_set(GPIOD, pin, value);
+	_gpio_set(GPIOD, pin, value);
 
 }
 

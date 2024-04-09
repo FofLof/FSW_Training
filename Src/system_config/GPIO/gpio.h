@@ -24,7 +24,7 @@
  *
  * @returns None
  */
-void gpio_high(GPIO_TypeDef * port, int pin);
+void _gpio_high(GPIO_TypeDef * port, int pin);
 
 /**
  * Sets the specified GPIO pin to low logic level.
@@ -34,7 +34,7 @@ void gpio_high(GPIO_TypeDef * port, int pin);
  *
  * @returns None
  */
-void gpio_low(GPIO_TypeDef * port, int pin);
+void _gpio_low(GPIO_TypeDef * port, int pin);
 
 /**
  * Sets the value of a GPIO pin on a given port.
@@ -45,7 +45,7 @@ void gpio_low(GPIO_TypeDef * port, int pin);
  *
  * @returns None
  */
-void gpio_set(GPIO_TypeDef * port, int pin, int value);
+void _gpio_set(GPIO_TypeDef * port, int pin, int value);
 
 /**
  * Reads the value of a GPIO pin.
