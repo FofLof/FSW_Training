@@ -3,12 +3,15 @@
 #include <LED/led.h>
 #include <Buttons/buttons.h>
 #include <print_scan.h>
+#include <Timers/timers.h>
 
 void branch_main() {
 	// space for initializations
 	buttons_init();
 	printer_init();
 	led_init();
+
+
 	uint64_t initTime = getSysTime();
 	uint64_t changeInTime = 0;
 	bool currentState = false;
@@ -26,11 +29,13 @@ void branch_main() {
 			printMsg("Button 1 ON\r\n");
 		}
 
+
 		if (changeInTime > 1000) {
+
 			changeInTime = 0;
+			initTime = getSysTime();
 			currentState = !currentState;
 			led_d1(currentState);
-
 		}
 
 
