@@ -24,7 +24,8 @@ void gpio_high(GPIO_TypeDef *port, int pin) {
 
 	//Same explanation as gpio_low but BS0 (set register) starts at 0 so think of this as adding GPIO_BSRR_BSO_POS
 	port->BSRR |= 0x1UL << pin;
-	port->BSRR &= ~(0x1UL << pin + GPIO_BSRR_BR0_Pos); //Sets corresponding BRx pin to LOW
+	port->BSRR &= ~(0x1UL << (pin + GPIO_BSRR_BR0_Pos)); //Sets corresponding BRx pin to LOW
+
 }
 
 void gpio_set(GPIO_TypeDef *port, int pin, bool value) {

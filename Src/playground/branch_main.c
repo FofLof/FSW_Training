@@ -4,19 +4,31 @@
 #include <Buttons/buttons.h>
 #include <print_scan.h>
 #include "gpio_.h"
+#include <Timers/timers.h>
 
 void branch_main() {
 	// space for initializations
-	GPIO_TypeDef* port;
-	int pin = 1;
-	gpio_configureMode(port, pin, GPIO_DIGITAL_OUT, GPIO_PULL_DOWN, GPIO_MED_SPEED, GPIO_PUSH_PULL);
+	printer_init();
+	bool currentState = false;
+	uint64_t initTime = getSysTime();
+	uint64_t changeInTime = 0;
+	int pin = 8;
+	GPIO_TypeDef* port = GPIOB;
+	gpio_configureMode(port, pin, GPIO_DIGITAL_OUT, -1, -1, -1);
+//	gpio_set(GPIOE, pin, GPIO_LOW);
+
 
 	// infinite loop
 	while (1) {
-		gpio_set(port, pin, GPIO_HIGH);
-		delay_ms(10);
-		gpio_set(port, pin, GPIO_LOW);
-		delay_ms(10);
+
+		changeInTime = getSysTime() - initTime;
+
+		if (changeInTime > 10) {
+			changeInTime = 0;
+			initTime = getSysTime();
+			currentState = !currentState;
+			gpio_set(port, pin, currentState);
+		}
 
 	}
 
